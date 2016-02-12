@@ -1,0 +1,21 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provision :shell, inline: "sudo echo 'nameserver 208.67.222.222' > /etc/resolv.conf"
+  config.vm.hostname = 'docker-pull-rl-berkshelf'
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.network :private_network, type: 'dhcp'
+  config.berkshelf.enabled = true
+
+  config.vm.provision :chef_solo do |chef|
+    chef.json = {
+      docker_pull_rl: {
+        }
+  }
+    chef.run_list = [
+      'recipe[docker_pull_rl::default]'
+    ]
+  end
+end

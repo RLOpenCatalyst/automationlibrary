@@ -1,0 +1,36 @@
+#!/bin/bash
+#Removing old binaries if exists
+
+if ! [ -d <%=@target%>/<%=@repoid%>/<%=@package%> ]; then
+
+if ! [ -d <%=@target%>/<%=@repoid%> ]; then
+mkdir <%=@target%>/<%=@repoid%>
+fi
+
+if ! [ -d <%=@target%>/<%=@repoid%>/<%=@package%> ]; then
+mkdir <%=@target%>/<%=@repoid%>/<%=@package%>
+fi
+
+if [ -d /tmp/<%=@app_name%> ]; then
+rm -rf /tmp/<%=@app_name%>
+fi
+
+apt-get install unzip zip -y
+
+cd /tmp
+wget <%=@url%>
+unzip <%=@package_name%>
+
+cp -rf /tmp/<%=@app_name%>/* <%=@target%>/<%=@repoid%>/<%=@package%>
+cd <%=@target%>/<%=@repoid%>/<%=@package%>/server
+
+# kill running apps
+killall node && echo "success"
+
+sudo node install --seed-data
+sudo forever start app.js
+
+
+fi
+
+

@@ -1,0 +1,29 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'deploy-tomcat-war-berkshelf'
+  config.vm.box = 'ubuntu/trusty64'
+
+  config.vm.network :private_network, type: 'dhcp'
+  config.berkshelf.enabled = true
+  config.vm.provision :shell, inline: "sudo echo 'nameserver 208.67.222.222' > /etc/resolv.conf"
+  config.vm.network :forwarded_port, guest: 8080, host: 8180
+  config.vm.network :forwarded_port, guest: 8005, host: 8105 
+
+  config.vm.provision :chef_solo do |chef|
+    #
+    chef.json = {
+      deploy_tomcat_war: {
+        nexusUrl: "http://nexus.rlcatalyst.com/nexus/content/repositories/petclinic/org/catalyst/petclinic/2.12.62/petclinic-2.12.62.war",
+        app_version: '2.12.62',
+        applicationNodeIP: 'localhost'
+        }
+  }
+
+    chef.run_list = [
+      'recipe[deploy_tomcat_war::default]'
+    ]
+  end
+end

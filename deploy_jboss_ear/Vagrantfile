@@ -1,0 +1,29 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'deploy-jboss-ear-berkshelf'
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.synced_folder "../", "/berkshelf"
+  config.vm.network :private_network, type: 'dhcp'
+  config.berkshelf.enabled = true
+  config.vm.provision :shell, inline: "sudo echo 'nameserver 208.67.222.222' > /etc/resolv.conf"
+  config.vm.network :forwarded_port, guest: 8080, host: 8180
+  config.vm.network :forwarded_port, guest: 8009, host: 8109
+  config.vm.network :forwarded_port, guest: 8443, host: 8543
+
+  config.vm.provision :chef_solo do |chef|
+    #
+    chef.json = {
+      deploy_jboss_ear: {
+        nexusUrl: 'mentioned the ear file link'
+        version: '1.0'
+        }
+  }
+
+    chef.run_list = [
+      'recipe[deploy_jboss_ear::default]'
+    ]
+  end
+end

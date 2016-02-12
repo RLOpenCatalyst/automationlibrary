@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Pull latest code
+echo "starting catalyst script"
+sudo apt-get update
+sudo apt-get install unzip zip -y && echo "install unzip utility sucess"
+sleep 8
+cd /home/ubuntu/development/catalyst
+wget <%=@url%>
+#unzip /usr/bin/unzip/<%=@package_name%> && echo "unzip app success"
+unzip <%=@package_name%> && echo "unzip app success"
+#git clone https://github.com/RLOpenCatalyst/core.git && cd D4D && git checkout dev_catalyst
+cd /home/ubuntu/development/catalyst/<%=@app_name%>/server
+sed -i 's/localhost/mongodb/g' config/app_config.js
+
+# Restore Mongodb
+mongod --fork --logpath /data/mongod.log --dbpath /data/db --noprealloc --smallfiles
+mongorestore --db devops_new /home/ubuntu/development/catalyst/D4D/seed/mongodump/devops_new
+
+# Start catalyst
+sudo apt-get update && apt-get install -y software-properties-common python-software-properties && sudo add-apt-repository ppa:chris-lea/node.js -y  && sudo apt-get install -y nodejs
+cd /home/ubuntu/development/catalyst/<%=@app_name%>/server
+sudo npm install
+sudo npm install -g forever
+sudo node install.js --seed-data
+sudo forever start app.js
+
