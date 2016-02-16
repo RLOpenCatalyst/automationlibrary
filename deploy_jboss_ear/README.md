@@ -1,10 +1,10 @@
 # deploy_jboss_ear-cookbook
-
-TODO: Enter the cookbook description here.
+It will be used to deploy any war or ear file in jboss application server.
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+Ubuntu 14.04
+
 
 ## Attributes
 
@@ -39,4 +39,4 @@ Include `deploy_jboss_ear` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: C Sraddhanand (sraddhanand.chikine@gmail.com)

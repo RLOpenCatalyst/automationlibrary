@@ -1,3 +1,11 @@
+# Cookbook Name:: deploy_upgrade_rlcatalyst
+# Recipe:: pre_deploy
+#
+# Copyright (C) 2015 Relevance Lab pvt ltd.
+#
+# All rights reserved - Do Not Redistribute
+#
+
 catalystCallbackUrl = node["deploy_upgrade_catalyst"]["catalystCallbackUrl"]
 url = node["rlcatalyst"]["nexusUrl"]
 version = node["rlcatalyst"]["version"]

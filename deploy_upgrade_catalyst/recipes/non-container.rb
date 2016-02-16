@@ -1,12 +1,10 @@
+# Cookbook Name:: deploy_upgrade_rlcatalyst
+# Recipe:: non-container
 #
-# Cookbook Name:: deploy_upgrade_catalyst
-# Recipe:: default
-#
-# Copyright 2015, mahendra.shivaswamy
+# Copyright (C) 2015 Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #
-
 
 url = node["rlcatalyst"]["nexusUrl"]
 repo = url.split("/").values_at(6)

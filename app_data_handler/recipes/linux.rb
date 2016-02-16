@@ -2,7 +2,7 @@
 # Cookbook Name:: app_data_handler
 # Recipe:: linux
 #
-# Copyright 2015, Relevance Lab INC
+# Copyright 2015, Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #

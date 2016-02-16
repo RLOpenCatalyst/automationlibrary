@@ -1,6 +1,6 @@
 
-# Cookbook Name:: container
-# Recipe:: default
+# Cookbook Name:: deploy_upgrade_catalyst
+# Recipe:: container
 #
 # Copyright 2015, Relevance Lab pvt ltd.
 #

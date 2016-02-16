@@ -1,24 +1,24 @@
 deploy_iis Cookbook
 ===================
-TODO: Enter the cookbook description here.
+Installs IIS and creates installs dotNet application.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+OS Support: 
+windows.
 
-e.g.
-#### packages
-- `toaster` - deploy_iis needs toaster to brown your bagel.
+
+Dependencies: 
+-------------
+iis
+git
+windows
+
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
-#### deploy_iis::default
 <table>
   <tr>
     <th>Key</th>
@@ -27,19 +27,15 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['deploy_iis']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['deploy_dotNet']['gitRepo'] </tt></td>
+    <td>String</td>
+    <td>git repo of dotnet application.</td>
+    <td><tt>git://github.com/RLIndia/cms.git</tt></td>
   </tr>
 </table>
 
 Usage
 -----
-#### deploy_iis::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
 Just include `deploy_iis` in your node's `run_list`:
 
 ```json
@@ -51,18 +47,3 @@ Just include `deploy_iis` in your node's `run_list`:
 }
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Authors: TODO: List authors

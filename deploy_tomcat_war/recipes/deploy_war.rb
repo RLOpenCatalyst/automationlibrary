@@ -1,4 +1,12 @@
 
+#
+# Cookbook Name:: deploy_tomcat_war
+# Recipe:: deploy_war
+#
+# Copyright (C) 2016 Relevance Lab pvt ltd.
+#
+# All rights reserved - Do Not Redistribute
+#
 catalystCallbackUrl = node["deploy_tomcat_war"]["catalystCallbackUrl"]
 url = node["rlcatalyst"]["nexusUrl"]
 version = node["rlcatalyst"]["version"]

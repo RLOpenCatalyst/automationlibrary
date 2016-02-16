@@ -1,5 +1,5 @@
 name             'deploy_liferay_app'
-maintainer       'YOUR_COMPANY_NAME'
+maintainer       'Relevance Lab INC'
 maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
 description      'Installs/Configures deploy_liferay_app'

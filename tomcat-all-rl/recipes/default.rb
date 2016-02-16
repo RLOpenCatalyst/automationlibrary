@@ -1,7 +1,7 @@
 #
 # Cookbook Name:: tomcat-all-rl
 # Recipe:: default
-#
+# Copyright 2015, Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #

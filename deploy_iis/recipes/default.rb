@@ -1,13 +1,15 @@
-# Cookbook Name:: deploy_iis
-# Recipe:: default
 #
-# Copyright 2015, YOUR_COMPANY_NAME
+# Cookbook Name:: app_data_handler
+# Recipe:: linux
+#
+# Copyright 2015, Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #
 
 #include_recipe "iis_test"
 
+include_recipe 'iis::mod_aspnet45'
 
 iis_site 'Default Web Site' do
   action [:stop, :delete]

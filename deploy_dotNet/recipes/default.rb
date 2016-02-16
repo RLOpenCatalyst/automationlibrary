@@ -1,11 +1,12 @@
 #
-# Cookbook Name:: deploy_iis
-# Recipe:: default
+# Cookbook Name:: app_data_handler
+# Recipe:: linux
 #
-# Copyright 2015, YOUR_COMPANY_NAME
+# Copyright 2015, Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #
+
 
 include_recipe "iis"
 include_recipe "git"

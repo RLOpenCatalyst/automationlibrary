@@ -1,3 +1,11 @@
+#
+# Cookbook Name:: deploy_jboss_ear
+# Recipe:: deploy_ear
+# Copyright 2016, Relevance Lab pvt ltd.
+#
+# All rights reserved - Do Not Redistribute
+#
+
 
 url = node["deploy_jboss_ear"]["nexusUrl"]
 version = node["deploy_jboss_ear"]["version"]

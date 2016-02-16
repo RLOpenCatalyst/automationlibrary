@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: deploy_dotnet_myshopper
-# Recipe:: default
+# Recipe:: 
 #
-# Copyright 2015, YOUR_COMPANY_NAME
+# Copyright 2015, Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #

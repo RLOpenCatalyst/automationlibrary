@@ -2,7 +2,7 @@
 # Cookbook Name:: deploy_upgrade_rlcatalyst
 # Recipe:: node.default
 #
-# Copyright 2015, mahendra.shivaswamy
+# Copyright (C) 2015 Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #

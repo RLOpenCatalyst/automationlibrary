@@ -1,12 +1,10 @@
-#
 # Cookbook Name:: deploy_upgrade_rlcatalyst
-# Recipe:: default
+# Recipe:: linux
 #
-# Copyright 2015, mahendra.shivaswamy
+# Copyright (C) 2015 Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #
-
 # Assumes that nexusurl, version, containerID attributes are exposed
 # GAV - GroupID, ArtifactID, Version
 # Version=major.minor.buildID

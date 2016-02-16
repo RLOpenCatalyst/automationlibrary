@@ -1,8 +1,7 @@
 #
 # Cookbook Name:: deploy_jboss_ear
 # Recipe:: default
-#
-# Copyright (C) 2016 YOUR_NAME
+# Copyright 2015, Relevance Lab pvt ltd.
 #
 # All rights reserved - Do Not Redistribute
 #

@@ -1,3 +1,11 @@
+#
+# Cookbook Name:: docker_pull_rl
+# Recipe:: default
+#
+# Copyright (C) 2015 Relevance Lab pvt ltd.
+#
+# All rights reserved - Do Not Redistribute
+#
 
 
 docker_service 'default' do

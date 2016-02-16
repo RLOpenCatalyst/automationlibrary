@@ -1,3 +1,10 @@
+# Cookbook Name:: deploy_upgrade_rlcatalyst
+# Recipe:: env_update
+#
+# Copyright (C) 2015 Relevance Lab pvt ltd.
+#
+# All rights reserved - Do Not Redistribute
+#
 
 
     mongod_package = `which mongod`
