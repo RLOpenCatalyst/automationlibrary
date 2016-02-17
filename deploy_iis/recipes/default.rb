@@ -30,10 +30,17 @@ puts "ZIPFILE NAME: " + app_zipname
 puts "FILE: " + app_name
 
 
+cookbook_file "C:\\chef\\cache\\#{app_zipname}.zip" do
+    source "DemoWebSite1.zip"
+    mode 00755
+    action :nothing
+end.run_action(:create)
+
+
 windows_zipfile "#{node['deploy_iis']['docroot']}\\demo" do
-  source node['deploy_iis']['applink']
+  source "C:\\chef\\cache\\#{app_zipname}.zip"
   action :unzip
-  not_if {::File.exists?("C:\chef\cache\\#{app_zipname}.zip")}
+  not_if {::File.exists?("C:\\chef\\cache\\#{app_zipname}.zip")}
 end
 
 #Create an app pool
