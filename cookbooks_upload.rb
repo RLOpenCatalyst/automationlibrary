@@ -1,6 +1,7 @@
 def berks_upload(home_dir)
-	knife_file = File.join(home_dir,'.chef/knife.rb')
-	if File.exist?(knife_file)
+	user = %x(knife user list)
+	puts "user: #{user}"
+	if !user.empty?
 		folders_list = Dir.entries(home_dir).sort!
 		puts folders_list
 		folders_list.each do |file|
@@ -14,7 +15,9 @@ def berks_upload(home_dir)
 				next
 			end	
 		end
+	else
+		puts "Please check the presence of pem file and knife.rb. If the files are missing or invalid, download from chef server"	
 	end
 end
 
-berks_upload('/home/sraddhananad/chef_workspace/automationlibrary')
+berks_upload(File.expand_path File.dirname(__FILE__))

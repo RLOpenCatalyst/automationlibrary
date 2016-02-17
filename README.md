@@ -1,46 +1,65 @@
-# automationlibrary
+# Automationlibrary
+===================
 Repository for RLCatalyst chef libraries
 
+Usage:
+------
+1. After chef server is configured, clone this repository on where you have configured knife (chef workstation directory).
+2. Run the ruby program available in this repositry.
+	```
+	ruby cookbooks_upload.rb
+	```
+	It will upload all the cookbooks along with the dependencies to the chef server.
 
-# List of the cookbooks:
 
-app_data_handler : It is used to POST the application data to catalyst App deploy API.
 
-database : It will provide enhanced database resources to include in recipes.
+List of the cookbooks:
+----------------------
 
-deploy_dotNet : Configures Windows server to launch dotNet application.
+- app_data_handler : It is used to POST the application data to catalyst App deploy API.
 
-deploy_dotnet_myshopper : Configures Windows server to launch ASP.NET application
+- database : It will provide enhanced database resources to include in recipes.
 
-deploy_iis : Installs IIS and creates environment ready.
+- deploy_dotNet : Configures Windows server to launch dotNet application.
 
-deploy_jboss_ear : It will be used to deploy war or ear file from any source.
+- deploy_dotnet_myshopper : Configures Windows server to launch ASP.NET application
 
-deploy_liferay_app : It will deploy liferay application.
+- deploy_iis : Installs IIS and creates environment ready.
 
-deploy_rlcatalyst  : It will install Catalyst application on a node.
+- deploy_jboss_ear : It will be used to deploy war or ear file from any source.
 
-deploy_tomcat_war  : It will any war file in  tomcat server and post the application details to catalyst App_deploy API.
+- deploy_liferay_app : It will deploy liferay application.
 
-deploy_upgrade_catalyst : It will install or upgrade catalyst application and POST the application details to catalyst App_deploy API.
+- deploy_rlcatalyst  : It will install Catalyst application on a node.
 
-docker : It contains all the resource required to  operate docker images, containers and service.
+- deploy_tomcat_war  : It will any war file in  tomcat server and post the application details to catalyst App_deploy API.
 
-docker_pull_rl : It is used to pull the private docker image by passing the attributes mentioned in the respective metadaata.rb. 
+- deploy_upgrade_catalyst : It will install or upgrade catalyst application and POST the application details to catalyst App_deploy API.
 
-iis  :  It provide whole IIS features.
+- docker : It contains all the resource required to  operate docker images, containers and service.
 
-java8 : It will be used to install Oracle JAVA.
+- docker_pull_rl : It is used to pull the private docker image by passing the attributes mentioned in the respective metadaata.rb. 
 
-jboss7_rl : It will be used to install JBOSS application server.
+- iis  :  It provide whole IIS features.
 
-liferay : It provide all the tools to deploy liferays application.
+- java8 : It will be used to install Oracle JAVA.
 
-mongodb : It will be used to install mongodb.
+- jboss7_rl : It will be used to install JBOSS application server.
 
-mongodb3 : It will be used to install mongodb version 3.2.0
+- liferay : It provide all the tools to deploy liferays application.
 
-postgresql : It helps in installing postgres server and client.
+- mongodb3 : It will be used to install mongodb version 3.2.0
 
-tomcat-all-rl : It will be used to install tomcat application server.
+- postgresql : It helps in installing postgres server and client.
+
+- tomcat-all-rl : It will be used to install tomcat application server.
+
+
+Disclaimer:
+-----------
+You may get warning from HTTPClient::CookieManager library, which would be thrown by httpclient-2.6.0.1 gem. 
+Reference Issue: https://github.com/chef/chef-dk/issues/597
+However it will not interrupt or affect the program execution. 
+
+
 
