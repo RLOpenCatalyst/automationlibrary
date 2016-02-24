@@ -2,6 +2,13 @@
 ===================
 Repository for RLCatalyst chef libraries
 
+#Branching Strategy
+
+1. Fork the master branch
+2. Clone the repo
+3. Once the changes are done, raise a pull request to the master branch.
+4. We will review and merge the changes
+
 Usage:
 ------
 1. After chef server is configured, clone this repository on where you have configured knife (chef workstation directory).
