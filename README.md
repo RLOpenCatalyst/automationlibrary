@@ -114,12 +114,17 @@ To decrease the back and forth in issues, and to help us get to the bottom of th
 Usage:
 ------
 1. After chef server is configured, clone this repository on where you have configured knife (chef workstation directory).
-2. Run the ruby program available in this repositry.
+1. Run the ruby program available in this repositry.
 	```
 	ruby cookbooks_upload.rb
 	```
 	It will upload all the cookbooks along with the dependencies to the chef server.
 
+To install berkshelf ( not required if you have installed chef-dk)
+```
+sudo /opt/chef/embedded/bin/gem install --no-rdoc --no-ri berkshelf
+sudo ln -s /opt/chef/embedded/bin/berks /usr/local/bin
+```
 
 
 List of the cookbooks:
