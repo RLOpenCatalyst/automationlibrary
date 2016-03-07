@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+  # box: centos66_64
+  box: ubuntu14_64
+  # box: win2k8r264
+  box: centos7
+  network:
+  - ["private_network", ip: "192.168.33.22"]
+  # - ["forwarded_port", {guest: 5985, host: 5985, id: "winrm", auto_correct: true}]
+  # - ["forwarded_port", {guest: 3389, host: 33389}]
+provisioner:
+  name: chef_solo
+  data_bags_path: ./data_bags
+
+platforms:
+  - name: ubuntu-14.04
+  - name: centos-7
+  # - name: windows2008r2
+  #   driver_config:
+  #     communicator: winrm
+  #   transport:
+  #     name: winrm
+
+suites:
+  - name: default
+    run_list:
+      - recipe[zookeeper]
+    attributes:

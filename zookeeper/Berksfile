@@ -1,0 +1,11 @@
+source "https://supermarket.chef.io"
+
+
+
+metadata
+
+cookbook 'magic', '~> 1.1'
+cookbook 'apt',  '>= 0.0.0'
+cookbook 'runit',  '>= 0.0.0'
+cookbook 'java',  '>= 0.0.0'
+cookbook 'build-essential', '>= 2.0.2'
