@@ -1,0 +1,20 @@
+I, [2016-02-13T05:40:42.151093 #5568]  INFO -- default-ubuntu-1204: -----> Creating <default-ubuntu-1204>...
+I, [2016-02-13T05:40:44.892405 #5568]  INFO -- default-ubuntu-1204: Bringing machine 'default' up with 'virtualbox' provider...
+I, [2016-02-13T05:40:45.010964 #5568]  INFO -- default-ubuntu-1204: ==> default: Box 'opscode-ubuntu-12.04' could not be found. Attempting to find and install...
+I, [2016-02-13T05:40:45.010964 #5568]  INFO -- default-ubuntu-1204:     default: Box Provider: virtualbox
+I, [2016-02-13T05:40:45.010964 #5568]  INFO -- default-ubuntu-1204:     default: Box Version: >= 0
+I, [2016-02-13T05:40:46.772659 #5568]  INFO -- default-ubuntu-1204: ==> default: Box file was not detected as metadata. Adding it directly...
+I, [2016-02-13T05:40:46.772659 #5568]  INFO -- default-ubuntu-1204: ==> default: Adding box 'opscode-ubuntu-12.04' (v0) for provider: virtualbox
+I, [2016-02-13T05:40:46.786344 #5568]  INFO -- default-ubuntu-1204:     default: Downloading: https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
+I, [2016-02-13T05:40:57.117509 #5568]  INFO -- default-ubuntu-1204: [K    default: Progress: 0% (Rate: 0/s, Estimated time remaining: --:--:--)[K    default: Progress: 0% (Rate: 8062/s, Estimated time remaining: 10:54:48)[K    default: Progress: 0% (Rate: 23109/s, Estimated time remaining: 3:48:25)[K    default: Progress: 0% (Rate: 40342/s, Estimated time remaining: 2:10:48)[K    default: Progress: 0% (Rate: 57698/s, Estimated time remaining: 1:31:25)[K    default: Progress: 0% (Rate: 69134/s, Estimated time remaining: 1:31:12)[K    default: Progress: 0% (Rate: 95942/s, Estimated time remaining: 1:15:06)[K    default: Progress: 0% (Rate: 88916/s, Estimated time remaining: 1:22:08)==> default: Waiting for cleanup before exiting...
+I, [2016-02-13T05:40:57.135107 #5568]  INFO -- default-ubuntu-1204: [K    default: Progress: 0% (Rate: 76350/s, Estimated time remaining: 1:26:54)[K    default: 
+I, [2016-02-13T05:40:57.135107 #5568]  INFO -- default-ubuntu-1204: ==> default: Box download was interrupted. Exiting.
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: The box failed to unpackage properly. Please verify that the box
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: file you're trying to add is not corrupted and try again. The
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: output from attempting to unpackage (if any):
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: 
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: x Vagrantfile
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: x box.ovf
+I, [2016-02-13T05:40:57.269222 #5568]  INFO -- default-ubuntu-1204: x metadata.json
+I, [2016-02-13T05:40:57.270183 #5568]  INFO -- default-ubuntu-1204: x ubuntu-12.04-amd64-disk1.vmdk: truncated gzip input
+I, [2016-02-13T05:40:57.270183 #5568]  INFO -- default-ubuntu-1204: bsdtar.EXE: Error exit delayed from previous errors.
