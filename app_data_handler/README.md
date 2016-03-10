@@ -2,20 +2,13 @@ app_data_handler Cookbook
 =========================
 It is used to POST the application data to catalyst App deploy API.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
-
 Requirements
 ------------
 
 Platforms:
  Ubuntu 14.04 and later
  centos 7
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - app_data_handler needs toaster to brown your bagel.
 
 Attributes
 ----------
@@ -54,7 +47,7 @@ Attributes
   <tr>
     <td><tt>['app_data_handler']['app']['applicationNodeIP']</tt></td>
     <td>string</td>
-    <td> node's public Ip address. </td>
+    <td> Node's public IP address which should be present as a instance inside catalyst. </td>
     <td><tt> nil </tt></td>
   </tr>
   <tr>
@@ -87,7 +80,7 @@ In data handler recipe of the cookbook, assign the values to attributes and then
 ```
 ruby_block "Update App data" do
   block do
-    node.default['app_data_handler']['catalystCallbackUrl'] = catalystCallbackUrl
+    node.default['app_data_handler']['catalystCallbackUrl'] = node['app_data_handler']['catalystCallbackUrl']
     node.default['app_data_handler']['app']['applicationName'] = repoid
     node.default['app_data_handler']['app']['applicationVersion'] = node["rlcatalyst"]["version"]
     node.default['app_data_handler']['app']['applicationType'] = "Package"

@@ -1,0 +1,26 @@
+<VirtualHost *>
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  # Allow server status for local requests only
+  <Location /server-status>
+    SetHandler server-status
+    Require ip 127.0.0.1 ::1
+  </Location>
+
+  # Reject all URLs but server-status
+  RewriteEngine On
+  RewriteRule ^(?!(/server-status)) - [R=404,L,NC]
+
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= node[:apache][:error_log] %>
+
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel warn
+
+  CustomLog <%= node[:apache][:log_dir] %>/<%= node[:apache][:access_log] %> combined
+  ServerSignature Off
+
+</VirtualHost>

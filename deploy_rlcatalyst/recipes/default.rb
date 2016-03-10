@@ -45,10 +45,10 @@ end
 	end
 
 
-puts "URL: " + node[:nodejs][:repo_url]
-puts "Source Dir: " +  node[:nodejs][:source_location]
-puts "JS File:" + node[:nodejs][:config_js]
-puts "Node version:" + node[:nodejs][:version]
+# puts "URL: " + node[:nodejs][:repo_url]
+# puts "Source Dir: " +  node[:nodejs][:source_location]
+# puts "JS File:" + node[:nodejs][:config_js]
+# puts "Node version:" + node[:nodejs][:version]
 
 execute 'Creating Directory: #{node[:nodejs][:source_location]}' do
   command "mkdir -p #{node[:nodejs][:source_location]}"
@@ -56,11 +56,11 @@ execute 'Creating Directory: #{node[:nodejs][:source_location]}' do
 end
 
 
-puts "URI : " + node[:nodejs][:repo_url]
-app_zipname = node[:nodejs][:repo_url].split("/").last
-app_name = app_zipname.split(".")[0]
-puts "ZIPFILE NAME: " + app_zipname
-puts "FILE: " + app_name
+# puts "URI : " + node[:nodejs][:repo_url]
+# app_zipname = node[:nodejs][:repo_url].split("/").last
+# app_name = app_zipname.split(".")[0]
+# puts "ZIPFILE NAME: " + app_zipname
+# puts "FILE: " + app_name
 
 
 

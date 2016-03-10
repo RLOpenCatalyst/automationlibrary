@@ -1,0 +1,8 @@
+extension=apcu.so
+; Shared memory size
+apc.shm_size = <%= node[:lamp][:apc][:memory] %>
+; Improve performance in production
+; apc.stat = 1
+apc.write_lock = 1
+; fixes slam defense warnings
+apc.slam_defense = <%= node[:lamp][:apc][:slam_defense] ? 'on' : 'off' %>

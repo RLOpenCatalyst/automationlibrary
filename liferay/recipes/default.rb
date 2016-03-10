@@ -64,9 +64,11 @@ link "#{node['liferay']['install_directory']}/liferay" do
   to "#{node['liferay']['install_directory']}/#{node['liferay']['download_version']}"
 end
 
+execute "chown root: #{node['liferay']['install_directory']}/#{node['liferay']['download_version']}/#{node['liferay']['tomcat_version']}"
+
 link "#{node['liferay']['install_directory']}/liferay/tomcat" do
-  owner node['liferay']['user']
-  group node['liferay']['group']
+  # owner node['liferay']['user']
+  # group node['liferay']['group']
   to "#{node['liferay']['install_directory']}/#{node['liferay']['download_version']}/#{node['liferay']['tomcat_version']}"
 end
 
@@ -217,4 +219,8 @@ end
 			action :run
 		end
 	end
+  
+service "liferay" do 
+  action :start
+end
 	

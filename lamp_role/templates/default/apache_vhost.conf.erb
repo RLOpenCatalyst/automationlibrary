@@ -1,0 +1,71 @@
+<VirtualHost <%= @params[:ssl] ? "*:#{params[:port]}" : '*' %>>
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <% (@params[:server_aliases] || []).each do |a| %><%= a %> <% end %>
+  DocumentRoot <%= @params[:document_root] %>
+
+  <%- if @params[:application_environment] -%>
+  SetEnv APPLICATION_ENV <%= @params[:application_environment] %>
+  <%- end -%>
+
+  <%- @params[:php_flags].each do |flag, value| -%>
+  php_flag <%= flag -%> <%= !!value ? 'on' : 'off' %>
+  <%- end -%>
+  <%- @params[:php_admin_flags].each do |flag, value| -%>
+  php_admin_flag <%= flag -%> <%= !!value ? 'on' : 'off' %>
+  <%- end -%>
+  <%- @params[:php_values].each do |name, value| -%>
+  php_value <%= name -%> "<%= value %>"
+  <%- end -%>
+  <%- @params[:php_admin_values].each do |name, value| -%>
+  php_admin_value <%= name -%> "<%= value %>"
+  <%- end -%>
+
+  <%- if @params[:ssl] -%>
+  SSLEngine On
+  SSLCertificateFile <%= File.join(node[:ssl][:certs_dir], "#{@params[:ssl_cert]}.crt") %>
+  SSLCertificateKeyFile <%= File.join(node[:ssl][:keys_dir], "#{@params[:ssl_cert]}.key") %>
+  SSLCertificateChainFile <%= File.join(node[:ssl][:certs_dir], "#{@params[:ssl_cert]}.chain.crt") %>
+  <%- end -%>
+
+  <Directory <%= @params[:document_root] %>>
+    Options <%= [@params[:directory_options] || 'FollowSymLinks' ].flatten.join ' ' %>
+    AllowOverride <%= [@params[:allow_override] || 'None' ].flatten.join ' ' %>
+    # 2.4 syntax
+    Require all granted
+  </Directory>
+
+  LogLevel warn
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+
+  RewriteEngine On
+  LogLevel info rewrite:trace1
+
+  <%- if @params[:canonical_hostname] -%>
+  # Canonical host, <%= @params[:canonical_hostname] %>
+  RewriteCond %{HTTP_HOST}   !^<%= @params[:canonical_hostname].gsub('.', '\.') %> [NC]
+  RewriteCond %{HTTP_HOST}   !^$
+  RewriteRule ^/(.*)$        http://<%= @params[:canonical_hostname] %>/$1 [L,R=301]
+  <%- end -%>
+
+  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+  RewriteRule ^.*$ /system/maintenance.html [L]
+</VirtualHost>
+
+<%- if @params[:ssl] -%>
+# Redirect only host on port 80
+<VirtualHost *:<%= node[:apache][:listen_ports].first %>>
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <% (@params[:server_aliases] || []).each do |a| %><%= a %> <% end %>
+
+  LogLevel warn
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+
+  # Force use of SSL
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
+</VirtualHost>
+<%- end -%>

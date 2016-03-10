@@ -10,7 +10,7 @@ def berks_upload(home_dir)
 				folder = File.join(home_dir,file)
 				Dir.chdir(folder)
 				`berks install`
-				`berks upload`
+				`berks upload --no-ssl-verify --force`
 			else 
 				next
 			end	

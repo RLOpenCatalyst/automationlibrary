@@ -1,6 +1,7 @@
 # Liferay cookbook [![Build Status](https://secure.travis-ci.org/thirdwavellc/chef-liferay.png)](http://travis-ci.org/thirdwavellc/chef-liferay)
 
 # Requirements
+Minimum RAM : 2GB.
 
 **cookbooks**
 

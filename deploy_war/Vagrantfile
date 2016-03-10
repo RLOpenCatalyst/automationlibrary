@@ -1,0 +1,35 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.hostname = 'deploy-war-berkshelf'
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.network "public_network"
+
+  config.berkshelf.enabled = true
+  config.vm.network :forwarded_port, guest: 8080, host: 8280
+  config.vm.network :forwarded_port, guest: 8005, host: 8205 
+
+  config.vm.provision :chef_solo do |chef|
+    chef.install = true
+    chef.version = "12.6.0"
+    
+    chef.json = {
+      # deploy_war: {
+      #  source_url: "https://s3-us-west-2.amazonaws.com/catalystcode/petclinic-2.02.71.war"
+      #   },
+       rlcatalyst: {
+        nexusUrl: "http://nexus.rlcatalyst.com/nexus/content/repositories/petclinic/org/catalyst/petclinic/2.12.62/petclinic-2.12.62.war",
+         app_version: '2.12.62',
+          applicationNodeIP: 'localhost'
+        }  
+  }
+
+    chef.run_list = [
+      'recipe[tomcat-all-rl::default]',
+      'recipe[deploy_war::default]'
+    ]
+  end
+end
