@@ -15,26 +15,31 @@
 
 ruby_block "check tomcat installation" do 
 	block do
-		if Dir.exist?("/var/lib/tomcat7/webapps")
-		  node.default[:tomcat7][:app_home] = "/var/lib/tomcat7/webapps"
-		elsif Dir.exist?("/opt/tomcat7/webapps")
+		# catalina_base = %x(echo $CATALINA_BASE)
+		# if catalina_base.empty?
+		# 	puts "CATALINA_BASE is not found, please install tomcat"
+		# else
+		# 	puts catalina_base
+		# 	node.default[:tomcat7][:app_home] = File.join(catalina_base, "webapps")
+		# end
+		
+		if Dir.exist?("/opt/tomcat7/webapps")
 		  node.default[:tomcat7][:app_home] = "/opt/tomcat7/webapps"
+		elsif Dir.exist?("/var/lib/tomcat7/webapps")
+		  node.default[:tomcat7][:app_home] = "/var/lib/tomcat7/webapps"
 		else
 			Chef::Log.info("Node does not contain Tomcat7 installed. Please install tomcat7")	
 		end
 
-		user = %x(stat -c "%U" #{node[:tomcat7][:app_home]})
-		#user = %x(cut -d: -f1 /etc/passwd | grep '^tomcat')
+		user = %x(cut -d: -f1 /etc/passwd | grep '^tomcat')
 		puts "Tomcat User: #{user}"
-		node.default[:tomcat7][:user] = node.default[:tomcat7][:group] = user[0..-2]
+		node.default[:tomcat7][:user] = node.default[:tomcat7][:group] = user[0..-2].split("\n").first
 
-		if node["rlcatalyst"]["nexusUrl"].nil? && node[:deploy_war][:source_url].nil?
+		unless node["rlcatalyst"]["nexusUrl"].nil?
+			run_context.include_recipe "deploy_war::deploy_war"
+		else
 			puts "Nothing to do, url and version are not specified"
 			Chef::Log.info("Nothing to do, url are not specified")
-		elsif !node["rlcatalyst"]["nexusUrl"].nil?	
-			run_context.include_recipe "deploy_war::deploy_war_nexus"
-		elsif !node[:deploy_war][:source_url].nil?
-			run_context.include_recipe "deploy_war::deploy_war_url"
 		end
 	end
 end

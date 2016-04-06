@@ -2,7 +2,7 @@
 # Cookbook Name:: app_data_handler
 # Recipe:: windows
 #
-# Copyright 2015, Relevance Lab pvt ltd.
+# Copyright 2015, Relevance Lab INC
 #
 # All rights reserved - Do Not Redistribute
 #

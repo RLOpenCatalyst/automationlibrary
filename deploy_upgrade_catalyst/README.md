@@ -1,38 +1,68 @@
-deploy_upgrade_catalyst Cookbook
+nexus_deploy_rlcatalyst Cookbook
 ================================
-upgrade if not installs catalyst application and POST the application details to catalyst's app/deploy API.
+TODO: Enter the cookbook description here.
+
+e.g.
+This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
-Ubuntu 14.04
-centos 7
+TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-##Cookbook dependency:
-----------------------
-
-'git', 
-'mongodb3', '>=4.0.0'
-'nodejs', '>=2.4.2'
-'build-essential', '>=2.2.3'
-'docker', '>=2.3.0' 
-'chef-client', '>=3.4.0'
-
+e.g.
+#### packages
+- `toaster` - nexus_deploy_rlcatalyst needs toaster to brown your bagel.
 
 Attributes
 ----------
-node["deploy_upgrade_catalyst"]["catalystCallbackUrl"] : set to "<deployed_catalyst_home_url>/app/deploy"
-node["rlcatalyst"]["nexusUrl"] : Catalyst assigns the application's nexus url.
-node["rlcatalyst"]["version"] : Catalyst assigns the repository's artifact version.
-node["deploy_upgrade_catalyst"]["target_dir"] = "/opt"
-node["deploy_upgrade_catalyst"]["download_dir"] = "/tmp"
-node['rlcatalyst']['containerId'] :If docker repo is choosen for the deployment, chef-client passes the Docker container ID.
-node['rlcatalyst']['containerPort'] : Container port number
-node["rlcatalyst"]["dockerRepo"] = docker hub repository of the image.
-node["rlcatalyst"]["applicationNodeIP"] : Pubilc IP of the node on which catalyst is running.
+TODO: List your cookbook attributes here.
 
+e.g.
+#### nexus_deploy_rlcatalyst::default
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['nexus_deploy_rlcatalyst']['bacon']</tt></td>
+    <td>Boolean</td>
+    <td>whether to include bacon</td>
+    <td><tt>true</tt></td>
+  </tr>
+</table>
 
 Usage
 -----
+#### nexus_deploy_rlcatalyst::default
+TODO: Write usage instructions for each cookbook.
 
-It will be used by catalyst application when application deployment feature is used from catalyst.
+e.g.
+Just include `nexus_deploy_rlcatalyst` in your node's `run_list`:
 
+```json
+{
+  "name":"my_node",
+  "run_list": [
+    "recipe[nexus_deploy_rlcatalyst]"
+  ]
+}
+```
+
+Contributing
+------------
+TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
+
+e.g.
+1. Fork the repository on Github
+2. Create a named feature branch (like `add_component_x`)
+3. Write your change
+4. Write tests for your change (if applicable)
+5. Run the tests, ensuring they all pass
+6. Submit a Pull Request using Github
+
+License and Authors
+-------------------
+Authors: TODO: List authors

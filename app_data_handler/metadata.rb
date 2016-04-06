@@ -4,9 +4,10 @@ maintainer_email 'mrigesh.priyadarshi@relevancelab.com'
 license          'All rights reserved'
 description      'Installs/Configures app_data_handler'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.4'
+version          '0.1.9'
 
 depends	'chef_handler'
+depends 'build-essential'
 
 recipe "app_data_handler", "Includes the RedHat recipe or any other recipe on the basis of Operating System Platform."
 recipe "app_data_handler::linux", "Configure Catalyst Attribute Handler for Chef client Run on RedHat, CentOS and  Ubuntu machines"

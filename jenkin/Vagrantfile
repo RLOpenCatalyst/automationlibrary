@@ -1,0 +1,29 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'jenkin-berkshelf'
+  config.vm.box = 'centos_7'
+  config.vm.network "public_network"
+
+  config.berkshelf.enabled = true
+  config.vm.network :forwarded_port, guest: 8080, host: 8380
+  config.vm.network :forwarded_port, guest: 3306, host: 3306 
+
+  config.vm.provision :chef_solo do |chef|
+    chef.install = true
+    chef.version = "12.6.0"
+    # chef.json = {
+    #   mysql: {
+    #     server_root_password: 'rootpass',
+    #     server_debian_password: 'debpass',
+    #     server_repl_password: 'replpass'
+    #   }
+    # }
+
+    chef.run_list = [
+      'recipe[jenkin::default]'
+    ]
+  end
+end

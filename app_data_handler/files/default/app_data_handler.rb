@@ -10,6 +10,7 @@
 require 'chef'
 require 'chef/handler'
 require 'rest-client'
+require 'net/http'
 
 class AppDataHandler < Chef::Handler
 	attr_reader :options
@@ -28,7 +29,7 @@ class AppDataHandler < Chef::Handler
             	Chef::Log.info("Making Rest call to #{options[:cl_ws_url]}")
 		handler_data = Hash.new
 		handler_data['appDeployData'] = {}
-		handler_data['appDeployData']["applicationStatus"] = success? ? "Successful" : "Failed"
+		#handler_data['appDeployData']["applicationStatus"] = success? ? "Successful" : "Failed"
 		handler_data['appDeployData']['applicationLastDeploy'] = "#{end_time}"
 		arr = Array.new
 		run_status.updated_resources.each do | r |
@@ -46,7 +47,7 @@ class AppDataHandler < Chef::Handler
                 if File.exists?("/var/log/chef/client.log") then 
                 path = "/var/log/chef/client.log"
                 str = File.open(path) {|f| f.read}
-                elsif
+                else
                 str="NA"
                 end
 		
@@ -55,9 +56,13 @@ class AppDataHandler < Chef::Handler
                 handler_data['appDeployData'].merge! options[:output_json]
                 
                 puts handler_data, options[:cl_ws_url]
+
                 puts "Before Posting AppDeploy"
 		postData = RestClient.post(options[:cl_ws_url], handler_data)
 		puts postData.body
 		return postData.body
+		#resp = Net::HTTP.post_form(options[:cl_ws_url], handler_data)
+		#puts resp.body
+		#return resp.body
 	end
 end

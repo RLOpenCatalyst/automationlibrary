@@ -1,18 +1,24 @@
 app_data_handler Cookbook
 =========================
-It is used to POST the application data to catalyst App deploy API.
+TODO: Enter the cookbook description here.
+
+e.g.
+This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
+TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-Platforms:
- Ubuntu 14.04 and later
- centos 7
-
+e.g.
+#### packages
+- `toaster` - app_data_handler needs toaster to brown your bagel.
 
 Attributes
 ----------
+TODO: List your cookbook attributes here.
 
+e.g.
+#### app_data_handler::default
 <table>
   <tr>
     <th>Key</th>
@@ -21,81 +27,15 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>[:app_data_handler][:catalystCallbackUrl]</tt></td>
-    <td>string</td>
-    <td> The callback url of catalyst, where the applicaition deploy data has to be POST'ed. </td>
-    <td><tt> nil </tt></td>
+    <td><tt>['app_data_handler']['bacon']</tt></td>
+    <td>Boolean</td>
+    <td>whether to include bacon</td>
+    <td><tt>true</tt></td>
   </tr>
-  <tr>
-    <td><tt>['app_data_handler']['app']['applicationName']</tt></td>
-    <td>string</td>
-    <td> Application name </td>
-    <td><tt> nil </tt></td>
-  </tr>
-  <tr>
-    <td><tt>['app_data_handler']['app']['applicationVersion']</tt></td>
-    <td>string</td>
-    <td> Artifact version in nexus repo </td>
-    <td><tt> nil </tt></td>
-  </tr>
-  <tr>
-    <td><tt>['app_data_handler']['app']['applicationInstanceName']</tt></td>
-    <td>string</td>
-    <td> Application name </td>
-    <td><tt> nil </tt></td>
-  </tr>
-  <tr>
-    <td><tt>['app_data_handler']['app']['applicationNodeIP']</tt></td>
-    <td>string</td>
-    <td> Node's public IP address which should be present as a instance inside catalyst. </td>
-    <td><tt> nil </tt></td>
-  </tr>
-  <tr>
-    <td><tt>['app_data_handler']['app']['envId'] </tt></td>
-    <td>string</td>
-    <td> The environment where the application has been deploy. ex: Dev or QA or Prod </td>
-    <td><tt> nil </tt></td>
-  </tr>
-  
-
-  <tr>
-    <td><tt>['app_data_handler']['app']['containerId'] </tt></td>
-    <td>string</td>
-    <td> If docker repo is choosen for the deployment, chef-client passes the Docker container ID. </td>
-    <td><tt> nil </tt></td>
-  </tr>
-  <tr>
-    <td><tt> ['app_data_handler']['app']['applicationType'] </tt></td>
-    <td>string</td>
-    <td> Artifact type, ex: binary, source, package. </td>
-    <td><tt> nil </tt></td>
-  </tr>
-
 </table>
 
 Usage
 -----
-In data handler recipe of the cookbook, assign the values to attributes and then call app_data_handler recipe. 
-
-```
-ruby_block "Update App data" do
-  block do
-    node.default['app_data_handler']['catalystCallbackUrl'] = node['app_data_handler']['catalystCallbackUrl']
-    node.default['app_data_handler']['app']['applicationName'] = repoid
-    node.default['app_data_handler']['app']['applicationVersion'] = node["rlcatalyst"]["version"]
-    node.default['app_data_handler']['app']['applicationType'] = "Package"
-    node.default['app_data_handler']['app']['containerId'] = "NA"
-    node.default['app_data_handler']['app']['applicationNodeIP'] = node["rlcatalyst"]["applicationNodeIP"]
-    node.default['app_data_handler']['app']['applicationInstanceName'] = repoid
-    node.default['app_data_handler']['app']['applicationStatus'] = node["deploy_tomcat_war"]["app_status"]
-  end
-end
-
-include_recipe "app_data_handler"
-```
-
-
-
 #### app_data_handler::default
 TODO: Write usage instructions for each cookbook.
 

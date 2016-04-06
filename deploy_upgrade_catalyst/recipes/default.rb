@@ -13,6 +13,8 @@
 # Package_name=ArtifactID-Version.zip
 include_recipe "chef-client::config"
 
+execute "sudo apt-get update"
+
 case node['os']
         when "linux"
                 case node['platform']

@@ -17,14 +17,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.version = "12.6.0"
     
     chef.json = {
-      # deploy_war: {
-      #  source_url: "https://s3-us-west-2.amazonaws.com/catalystcode/petclinic-2.02.71.war"
-      #   },
-       rlcatalyst: {
-        nexusUrl: "http://nexus.rlcatalyst.com/nexus/content/repositories/petclinic/org/catalyst/petclinic/2.12.62/petclinic-2.12.62.war",
-         app_version: '2.12.62',
-          applicationNodeIP: 'localhost'
-        }  
+      deploy_war: {
+       source_url: "https://s3-us-west-2.amazonaws.com/catalystcode/petclinic-2.02.71.war"
+        }
+       # rlcatalyst: {
+       #  nexusUrl: "http://nexus.rlcatalyst.com/nexus/content/repositories/petclinic/org/catalyst/petclinic/2.12.62/petclinic-2.12.62.war",
+       #   app_version: '2.12.62',
+       #   applicationNodeIP: 'localhost'
+       # }  
   }
 
     chef.run_list = [

@@ -1,0 +1,35 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'artifactory-berkshelf'
+#  config.vm.box = 'centos_7'
+  config.vm.box = 'opscode-ubuntu-14.04'
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1624
+    v.cpus = 2
+  end
+  config.berkshelf.enabled = true
+  config.vm.network :forwarded_port, guest: 8081, host: 8481
+  config.vm.network :forwarded_port, guest: 8019, host: 8419
+  config.vm.network :forwarded_port, guest: 8015, host: 8415 
+
+  config.vm.provision :chef_solo do |chef|
+    chef.install = true
+    chef.version = "12.6.0"
+    # chef.json = {
+    #   mysql: {
+    #     server_root_password: 'rootpass',
+    #     server_debian_password: 'debpass',
+    #     server_repl_password: 'replpass'
+    #   }
+    # }
+
+    chef.run_list = [
+      'recipe[artifactory::default]'
+    ]
+  end
+end

@@ -1,0 +1,10 @@
+default['nexus']['java']['type'] = 'openjdk'
+default['nexus']['java']['version'] = '7'
+default['nexus']['java']['packagename'] = "#{node['nexus']['java']['type']}-#{node['nexus']['java']['version']}-jdk"
+default['nexus']['download']['version'] = '2.12.0-01'
+default['nexus']['download']['url'] = "http://download.sonatype.com/nexus/oss/nexus-#{node['nexus']['download']['version']}-bundle.tar.gz"
+default['nexus']['yum_java'] = 'java'
+default['nexus']['yum_java_version'] = '1.7.0'
+default['nexus']['yum_java_packagename'] = "#{node['nexus']['yum_java']}-#{node['nexus']['yum_java_version']}-#{node['nexus']['java']['type']}.x86_64"
+default['nexus']['user'] = 'nexus'
+default['nexus']['group'] = 'nexus'

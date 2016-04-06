@@ -20,8 +20,7 @@
     node_package = `which node`
     if node_package.empty? then
         Chef::Log.info("Node is not present. Installing using nodejs cookbook")
-        include_recipe 'deploy_upgrade_catalyst::install_node' 
-        
+        include_recipe 'deploy_upgrade_catalyst::install_node_binary'
     elsif %x(#{`which node`[0..-2]} --version)[1..-2] < node[:nodejs][:version] then
         `killall node | echo`
         `npm install -g n && n #{node[:nodejs][:version]}`
@@ -33,10 +32,10 @@
 
     
     npm_package = `which npm`
+    
     if npm_package.empty? then
-        Chef::Log.info("npm is not present. Installing using nodejs::npm recipe")
-        execute 'npm install npm@latest -g'
-        
+        Chef::Log.info("npm is not present. Installing using deploy_upgrade_catalyst::install_node_deb_package recipe")
+      include_recipe 'deploy_upgrade_catalyst::install_node_binary'          
     elsif %x(#{`which npm`[0..-2]} --version)[0..-2] < node[:nodejs][:npm][:version] then
         `killall node | echo`
         `npm install -g npm && npm #{node[:nodejs][:npm][:version]}`

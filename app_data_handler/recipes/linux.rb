@@ -2,14 +2,14 @@
 # Cookbook Name:: app_data_handler
 # Recipe:: linux
 #
-# Copyright 2015, Relevance Lab pvt ltd.
+# Copyright 2015, Relevance Lab INC
 #
 # All rights reserved - Do Not Redistribute
 #
 
 attrib = node['app_data_handler']
 include_recipe "chef_handler"
-
+include_recipe 'build-essential::default'
 chef_gem "rest-client" do
 	compile_time false if respond_to?(:compile_time)
 	action :install

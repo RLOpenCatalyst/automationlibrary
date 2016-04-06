@@ -1,21 +1,23 @@
 name             'deploy_war'
-maintainer       'C Sraddhanand'
+maintainer       'Sraddhanand'
 maintainer_email 'sraddhanand.chikine@relevancelab.com'
 license          'All rights reserved'
 description      'Installs/Configures deploy_war'
 long_description 'Installs/Configures deploy_war'
-version          '0.1.4'
+version          '0.1.8'
 
 depends "app_data_handler", ">= 0.1.3"
-depends 'chef-client'
-depends 'build-essential'
+depends 'chef-client', '3.4.0'
+depends 'build-essential', '2.2.3'
+depends 'tomcat-all-rl', '>=0.1.0'
+depends 'zip', '1.1.0'
 
-attribute 'deploy_war/source_url',
+attribute 'rlcatalyst/nexusUrl',
   :display_name => "Source Code URL",
   :description => "Source Code URL",
   :default => nil
 
-attribute 'deploy_war/app_version',
+attribute 'rlcatalyst/version',
   :display_name => "Application version",
   :description => "Application Release Version",
   :default => nil

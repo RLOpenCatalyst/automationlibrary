@@ -1,0 +1,49 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'multitier-war-berkshelf'
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.network "public_network"
+
+  config.berkshelf.enabled = true
+  config.vm.network :forwarded_port, guest: 80, host: 8580
+  config.vm.network :forwarded_port, guest: 8080, host: 8680 
+
+  config.vm.provision :chef_solo do |chef|
+    chef.install = true
+    chef.version = "12.6.0"
+    chef.json = {
+      multitier_war: {
+        database: {
+          server_ip: '192.168.152.215',
+          server_port: '3306',
+          db_name: 'petclinic',
+          db_user: 'userpet',
+          db_password: 'petuser123' 
+        },
+        source_url: 'https://s3-ap-southeast-2.amazonaws.com/petclinictest/petclinic_mysql.war'
+    }
+  }
+
+    chef.run_list = [
+      'recipe[tomcat-all-rl::default]',
+      'recipe[multitier_war::default]'
+    ]
+  end
+end
+
+
+
+
+
+
+
+# default[:multitier_war][:database][:server_ip] = nil
+# default[:multitier_war][:database][:server_port] = nil
+# default[:multitier_war][:database][:db_name] = nil
+# default[:multitier_war][:database][:db_user] = nil
+# default[:multitier_war][:database][:db_password] = nil
+
+# default[:multitier_war][:source_url] = nil
