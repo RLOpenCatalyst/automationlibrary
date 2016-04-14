@@ -1,0 +1,37 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'docker-deploy-berkshelf'
+#  config.vm.box = 'centos_7'
+  config.vm.box = 'opscode-ubuntu-14.04'
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1624
+    v.cpus = 2
+  end
+  config.berkshelf.enabled = true
+  #config.vm.network :forwarded_port, guest: 8081, host: 8481
+  config.vm.network :forwarded_port, guest: 3001, host: 3301
+  config.vm.network :forwarded_port, guest: 8080, host: 8180 
+
+  config.vm.provision :chef_solo do |chef|
+    chef.install = true
+    chef.version = "12.8.1"
+
+    chef.json = {
+      docker_deploy: {
+        image: "httpd",
+        image_tag: "latest",
+        docker_port: "80",
+        host_port: "8080",
+        container_name: "apache_web"
+      }
+    }
+    chef.run_list = [
+      'recipe[docker_deploy::default]'
+    ]
+  end
+end

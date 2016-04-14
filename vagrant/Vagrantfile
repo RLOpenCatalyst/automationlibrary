@@ -1,0 +1,31 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'vagrant-berkshelf'
+  #config.vm.box = 'centos_7'
+  config.vm.box = 'opscode-ubuntu-14.04'
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1624
+    v.cpus = 2
+  end
+  config.berkshelf.enabled = true
+  #config.vm.network :forwarded_port, guest: 8081, host: 8481
+  #config.vm.network :forwarded_port, guest: 3306, host: 3306
+  config.vm.network :forwarded_port, guest: 8080, host: 8280 
+
+  config.vm.provision :chef_solo do |chef|
+    # chef.chef_server_url = "https://api.chef.io/organizations/appscraft"
+    # chef.validation_key_path = "/home/sraddhananad/sradhu/hosted_chef/chef-repo/.chef/appscraft-validator.pem"
+    chef.install = true
+    chef.version = "12.8.1"
+
+    chef.run_list = [
+      'recipe[vagrant::default]'
+    ]
+
+  end
+end

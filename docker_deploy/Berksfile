@@ -1,0 +1,4 @@
+source "https://supermarket.chef.io"
+
+metadata
+cookbook 'app_data_handler', path: '../app_data_handler'

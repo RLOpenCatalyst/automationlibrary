@@ -1,0 +1,15 @@
+default[:rlcatalyst][:callbackURL] = "http://d4d.rlcatalyst.com/app/deploy"
+default[:rlcatalyst][:registry_server] = "https://index.docker.io/v1/"
+default[:rlcatalyst][:dockerUser] = nil
+default[:rlcatalyst][:dockerPassword] = nil
+default[:rlcatalyst][:dockerEmailId] = nil
+default[:rlcatalyst][:dockerImage] = nil
+default[:rlcatalyst][:imageTag] = nil
+default[:rlcatalyst][:containerPort] = nil
+default[:rlcatalyst][:hostPort] = nil
+default[:rlcatalyst][:container_command] = nil
+default[:rlcatalyst][:containerId] = nil
+default[:rlcatalyst][:applicationNodeIP] = nil
+default[:rlcatalyst][:upgrade] = false
+default[:rlcatalyst][:ContainerVolumes] = nil
+default[:rlcatalyst][:applicationStatus] = "NA"

@@ -2,7 +2,7 @@
 # user = %x(cut -d: -f1 /etc/passwd | grep '^tomcat')
 # if user is not empty, call single node
 # else call 2 nodes
-war_recipe = search(:node, %Q{run_list:*multitier_war* AND run_list:*multitier_db* }  )
+war_recipe = search(:node, %Q{run_list:*multitier_war* AND run_list:*multitier_db* })
 
 user = %x(cut -d: -f1 /etc/passwd | grep '^tomcat')
 
