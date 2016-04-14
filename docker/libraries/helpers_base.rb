@@ -51,10 +51,10 @@ module DockerCookbook
                         end
       end
 
-      def with_retries(&block)
+      def with_retries(&_block)
         tries = api_retries
         begin
-          block.call
+          yield
           # Only catch errors that can be fixed with retries.
         rescue Docker::Error::ServerError, # 404
                Docker::Error::UnexpectedResponseError, # 400
@@ -94,14 +94,6 @@ module DockerCookbook
           "#{ENV['DOCKER_CERT_PATH']}/cert.pem"
         when 'key'
           "#{ENV['DOCKER_CERT_PATH']}/key.pem"
-        end
-      end
-
-      # recursively remove nil values from a hash
-      def compact!(v)
-        v.reject! do |_, value|
-          compact!(value) if value.is_a?(Hash)
-          value.nil?
         end
       end
     end

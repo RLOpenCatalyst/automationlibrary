@@ -367,6 +367,7 @@ the options found in the
 - `host` - Daemon socket(s) to connect to - `tcp://host:port`,
   `unix:///path/to/socket`, `fd://*` or `fd://socketfd`
 - `icc` - Enable inter-container communication
+- `insecure_registry` - Enable insecure registry communication
 - `ip` - Default IP when binding container ports
 - `ip_forward` - Enable ip forwarding
 - `ipv4_forward` - Enable net.ipv4.ip_forward
@@ -399,6 +400,7 @@ the options found in the
 - `tmpdir` - ENV variable set before for Docker daemon starts
 - `logfile` - Location of Docker daemon log file
 - `userland_proxy`- Enables or disables docker-proxy
+- `disable_legacy_registry` - Do not contact legacy registries
 
 #### Actions
 - `:create` - Lays the Docker bits out on disk

@@ -1,3 +1,27 @@
+v2.4.7
+--------------------
+- Using Gem::Version to handle semantic verisoning and be compatible for ≥ 1.10
+
+- v2.4.6
+--------------------
+- #613 - Fix docker_container redeploys with bad link array ordering
+
+v2.4.5
+--------------------
+- Fix coerce_volumes in case current value is a Chef::Node::ImmutableArray
+- Adding tests for binds alias to volumes
+
+v2.4.4
+--------------------
+- Updating vendored docker-api to 1.25.0
+- Adding experimental docker_network resource
+
+v2.4.3
+--------------------
+- Setting docker_container property defaults to match Docker CLI
+- Reverting image-id hack
+- Adding disable-legacy-registry
+
 v2.4.2
 --------------------
 - Unifying volumes and binds properties on docker_container resource

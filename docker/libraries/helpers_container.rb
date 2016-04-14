@@ -2,12 +2,13 @@ module DockerCookbook
   module DockerHelpers
     module Container
       def coerce_links(v)
-        v = Array(v)
-        if v.empty?
-          nil
+        case v
+        when DockerBase::UnorderedArray, nil
+          v
         else
+          return nil if v.empty?
           # Parse docker input of /source:/container_name/dest into source:dest
-          v.map do |link|
+          DockerBase::UnorderedArray.new(Array(v)).map! do |link|
             if link =~ %r{^/(?<source>.+):/#{name}/(?<dest>.+)}
               link = "#{Regexp.last_match[:source]}:#{Regexp.last_match[:dest]}"
             end
@@ -44,13 +45,14 @@ module DockerCookbook
           DockerBase::PartialHash[v]
         else
           b = []
-          v = Array(v)
+          v = Array(v).to_a # in case v.is_A?(Chef::Node::ImmutableArray)
           v.delete_if do |x|
             parts = x.split(':')
             b << x if parts.length > 1
           end
-          volumes_binds b unless b.empty?
-          return nil if v.empty?
+          b = nil if b.empty?
+          volumes_binds b
+          return DockerBase::PartialHash.new if v.empty?
           v.each_with_object(DockerBase::PartialHash.new) { |volume, h| h[volume] = {} }
         end
       end
