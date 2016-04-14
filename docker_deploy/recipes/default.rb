@@ -9,6 +9,8 @@
 # docker deploy data bag
 # 2 data bag items, for each item do the docker install.
 
+include_recipe "docker_deploy::validator"
+
 
 dockerUser = node["rlcatalyst"]["dockerUser"]
 dockerPassword = node["rlcatalyst"]["dockerPassword"]
@@ -34,6 +36,7 @@ puts "********Start Printing attributes*********"
   puts "containerId:: #{containerId}"
   puts "applicationNodeIP:: #{applicationNodeIP}"
   puts "upgrade:: #{upgrade}"
+  puts "callbackURL::#{node[:rlcatalyst][:callbackURL]}"
 puts "********End Printing attributes*********"
 
 
@@ -42,23 +45,19 @@ docker_service 'default' do
   action [:create, :start]
 end
 
-# # logs into the docker hub and and pull the specific image 
-if dockerUser.empty?
-  docker_image dockerImage do
+
+if dockerUser && !dockerUser.empty?
+     execute "pull private repo" do
+      command "docker login -u #{"#{dockerUser}"} -p #{"#{dockerPassword}"} -e #{"#{dockerEmailId}"} && docker pull #{"#{dockerImage}"}:#{"#{imageTag}"}" 
+  end 
+
+else
+ docker_image dockerImage do
     tag imageTag
     action :pull
     retries 2
     #notifies :redeploy, 'docker_container[catalyst]'
   end
-
-else
-  execute "pull private repo" do
-    if !dockerImage.empty? then
-      command "docker login -u #{"#{dockerUser}"} -p #{"#{dockerPassword}"} -e #{"#{dockerEmailId}"} && docker pull #{"#{dockerImage}"}:#{"#{imageTag}"}"
-    else 
-      command "docker login -u #{"#{dockerUser}"} -p #{"#{dockerPassword}"} -e #{"#{dockerEmailId}"}"
-    end    
-  end 
 end
 
 
@@ -80,6 +79,7 @@ docker_container containerId do
   port "#{node[:rlcatalyst][:hostPort]}:#{node[:rlcatalyst][:containerPort]}"
   #volumes node[:rlcatalyst][:volumes]
   volumes container_volumes
+
   action [:run, :start]
 end  
 

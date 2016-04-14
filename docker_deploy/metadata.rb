@@ -1,15 +1,16 @@
 name             'docker_deploy'
-maintainer       'C Sraddhanan'
-maintainer_email 'sraddhanan.chikine@relevancelab.com'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
 description      'Installs/Configures docker_deploy'
 long_description 'Installs/Configures docker_deploy'
-version          '0.1.3'
+version          '0.1.4'
 
 depends 'docker', "2.4.7"
 depends "app_data_handler", ">= 0.1.3"
 depends 'build-essential'
-
+# image name
+# user 
 attribute 'rlcatalyst/dockerImage',
   :display_name => "Docker Image",
   :description => "mention in repo/image format",
@@ -61,6 +62,11 @@ attribute 'rlcatalyst/ContainerVolumes',
 	display_name: "Container Volumes",
 	description: "Bind volumes container with host",
 	default: nil 
+
+attribute 'rlcatalyst/callbackURL',
+	display_name: "Callback URL",
+	description: "URL of catalyst API to send the Application deployment report",
+	default: "http://d4d.rlcatalyst.com/app/deploy"
 
 attribute 'rlcatalyst/upgrade',
     display_nam: "Upgrade",

@@ -13,3 +13,4 @@ default[:rlcatalyst][:applicationNodeIP] = nil
 default[:rlcatalyst][:upgrade] = false
 default[:rlcatalyst][:ContainerVolumes] = nil
 default[:rlcatalyst][:applicationStatus] = "NA"
+default[:rlcatalyst][:publish_all_ports] = false

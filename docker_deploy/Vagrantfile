@@ -22,12 +22,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.version = "12.8.1"
 
     chef.json = {
-      docker_deploy: {
-        image: "httpd",
-        image_tag: "latest",
-        docker_port: "80",
-        host_port: "8080",
-        container_name: "apache_web"
+      rlcatalyst: {
+        #dockerUser: ,
+        #dockerPassword: ,
+        #dockerEmailId: ,
+        dockerImage: "relevancelab/catalystproductimage",
+        imageTag: "latest",
+        containerPort: "3001" ,
+        hostPort: "3001" ,
+        containerId: "catalyst" 
       }
     }
     chef.run_list = [
