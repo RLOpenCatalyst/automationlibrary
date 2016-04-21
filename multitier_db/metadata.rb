@@ -4,7 +4,7 @@ maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
 description      'Installs/Configures multitier_db'
 long_description 'Installs/Configures multitier_db'
-version          '0.1.4'
+version          '0.1.5'
 
 depends 'mysql'
 depends 'database'

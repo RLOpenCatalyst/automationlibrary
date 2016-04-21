@@ -5,26 +5,28 @@
 
 #same node: mysql attributes
 #mysql user
-# search the node by role
-# get the ip address of the node
 
+#multi_node. data bag
+db_recipe = search(:node, %Q{run_list:*multitier_war* AND run_list:*multitier_db* })
 
-db_server = search(:node, "roles:petclinic_db").first
-db_ip = db_server['cloud'].nil? ? db_server['ipaddress'] : db_server['cloud']['public_ipv4']
+ mysql_user = %x(cut -d: -f1 /etc/passwd | grep '^mysql')
 
-puts db_ip
-puts db_server[:multitier][:database_name]
-puts db_server[:multitier][:database_user]
-puts  db_server[:multitier][:database_password]
+if !mysql_user.empty? || !db_recipe.empty?
 
-if !db_ip.nil?
-  node.default[:multitier_war][:database][:server_ip] = db_ip
-  node.default[:multitier_war][:database][:server_port] = "3306"
-  node.default[:multitier_war][:database][:db_name] = db_server[:multitier][:database_name]
-  node.default[:multitier_war][:database][:db_user] = db_server[:multitier][:database_user]
-  node.default[:multitier_war][:database][:db_password] = db_server[:multitier][:database_password]
- else 
-   puts "DB server is not found in the chef server. Please use petclinic_db role to launch a db server"
+  node.default[:multitier_war][:database][:server_ip] = "localhost"
+  node.default[:multitier_war][:database][:server_port] = node[:mysql][:server_port]
+  node.default[:multitier_war][:database][:db_name] = node[:multitier][:database_name]
+  node.default[:multitier_war][:database][:db_user] = node[:multitier][:database_user]
+  node.default[:multitier_war][:database][:db_password] = node[:multitier][:database_password]
+else 
+  db_server = search(:petclinic, "id:petclinic_app").first
+  puts "search result: #{db_server[:ip]}"
+
+  node.default[:multitier_war][:database][:server_ip] = db_server[:ip]
+  node.default[:multitier_war][:database][:server_port] = db_server[:db_port]
+  node.default[:multitier_war][:database][:db_name] = db_server[:db_name]
+  node.default[:multitier_war][:database][:db_user] = db_server[:db_user]
+  node.default[:multitier_war][:database][:db_password] = db_server[:db_password]
 end
 
 url = node[:rlcatalyst][:nexusUrl]
@@ -34,7 +36,7 @@ app_arch_file = url.split("/").last
 arch_extn = app_arch_file[-3..-1]
 
 if arch_extn == 'war' 
-  repoid = db_server[:multitier][:database_name]
+  repoid = node[:multitier][:app_name] || db_server[:app_name]
   tomcat_app_arch = "#{node['tomcat-all-rl']['tomcat_home']}/webapps/#{repoid}.war"
 
 
@@ -111,3 +113,5 @@ else
 
   puts "Please provide war file"
 end
+
+

@@ -4,7 +4,7 @@ maintainer_email 'sraddhanand.chikine@relevancelab.com'
 license          'All rights reserved'
 description      'Installs/Configures multitier_war'
 long_description 'Installs/Configures multitier_war'
-version          '0.1.4'
+version          '0.1.5'
 
 depends 'tomcat-all-rl'
 depends "app_data_handler", ">= 0.1.3"
