@@ -45,10 +45,14 @@ docker_service 'default' do
   action [:create, :start]
 end
 
-
+# # logs into the docker hub and and pull the specific image 
 if dockerUser && !dockerUser.empty?
      execute "pull private repo" do
-      command "docker login -u #{"#{dockerUser}"} -p #{"#{dockerPassword}"} -e #{"#{dockerEmailId}"} && docker pull #{"#{dockerImage}"}:#{"#{imageTag}"}" 
+    #if dockerImage && !dockerImage.empty? then
+      command "docker login -u #{"#{dockerUser}"} -p #{"#{dockerPassword}"} -e #{"#{dockerEmailId}"} && docker pull #{"#{dockerImage}"}:#{"#{imageTag}"}"
+    #else 
+    #  command "docker login -u #{"#{dockerUser}"} -p #{"#{dockerPassword}"} -e #{"#{dockerEmailId}"}"
+    #end    
   end 
 
 else
@@ -62,7 +66,8 @@ end
 
 
 if upgrade == true
-  docker_container containerId do 
+  docker_container "delete_old" do 
+    container_name containerId
     kill_after 30
     action [:stop,:delete]
   end
@@ -70,22 +75,23 @@ end
 
 container_volumes = Array(node[:rlcatalyst][:ContainerVolumes])
 
-docker_container containerId do
+docker_container "run container" do
+  container_name containerId
   repo dockerImage
   tag imageTag
-  #command "#{container_command}"
   tty true
-  detach true
   port "#{node[:rlcatalyst][:hostPort]}:#{node[:rlcatalyst][:containerPort]}"
-  #volumes node[:rlcatalyst][:volumes]
   volumes container_volumes
-
+  restart_policy 'on-failure'
+  restart_maximum_retry_count 2
   action [:run, :start]
 end  
 
-ruby_block "sleep 30" do 
+ruby_block "sleep 60" do 
   block do
-    sleep(30)
+    puts "Waiting for the container to be up and running .............."
+    sleep(60)
+    
     status = %x(docker ps | grep #{containerId}).empty?
     node.default[:rlcatalyst][:applicationStatus] = status ? "Failure" : "Successful"
   end
@@ -104,7 +110,7 @@ ruby_block "Update App data" do
                 node.default['app_data_handler']['catalystCallbackUrl'] = node[:rlcatalyst][:callbackURL]
                 node.default['app_data_handler']['app']['containerId'] = "#{containerId}"
                 node.default['app_data_handler']['app']['applicationType'] = "Container"
-                node.default['app_data_handler']['app']['applicationName'] = repoid
+                node.default['app_data_handler']['app']['applicationName'] = dockerImage
                 node.default['app_data_handler']['app']['applicationVersion'] = "#{imageTag}"
                 node.default['app_data_handler']['app']['applicationInstanceName'] = repoid
                 node.default['app_data_handler']['app']['applicationNodeIP'] = ipaddrs

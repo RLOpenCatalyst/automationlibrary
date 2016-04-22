@@ -1,10 +1,10 @@
 name             'docker_deploy'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'C Sraddhanand'
+maintainer_email 'sraddhanand.chiine@relevancelab.com'
 license          'All rights reserved'
 description      'Installs/Configures docker_deploy'
 long_description 'Installs/Configures docker_deploy'
-version          '0.1.4'
+version          '0.1.7'
 
 depends 'docker', "2.4.7"
 depends "app_data_handler", ">= 0.1.3"
