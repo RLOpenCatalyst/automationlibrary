@@ -16,42 +16,42 @@ attribute 'mysql/initial_root_password',
 	display_name: 'server_root_password',
 	description: 'server root password',
 	type: 'string',
-	default: nil
+	default: "u8y7t6r5"
 
 attribute 'multitier/database_name',
 	display_name: "Database name",
 	description: "Database Name of your application",
-	default: nil
+	default: "petclinic"
 
 attribute 'multitier/database_user',
 	display_name: "Database User",
 	description: "Database User of your application",
-	default: nil
+	default: "petuser"
 
 attribute 'multitier/database_password',
 	display_name: "Database Password",
 	description: "Database Password of your application",
 	type: 'string',
-	default: nil
+	default: "userpet@123"
 
 attribute "multitier/app_name",
 	display_name: "Application Name",
 	description: "J2EE application name",
-	default: nil
+	default: "petclinic"
 
 
 attribute 'rlcatalyst/dbpkgurl',
 	display_name: "DB Scripts URL",
 	description: "url of database scripts as .zip or .sql",
-	default: nil
+	default: "https://s3-ap-southeast-2.amazonaws.com/petclinictest/initDB.sql"
 
 attribute 'rlcatalyst/db_release_version',
 	display_name: "Release Version",
 	description: "Release Version of database package",
-	default: nil
+	default: "1.0"
 
 
 attribute 'rlcatalyst/CallbackUrl',
   :display_name => "Callback URL",
   :description => "Catalyst url to send node report",
-  :default => nil
+  :default => "http://52.201.159.126/app/deploy"

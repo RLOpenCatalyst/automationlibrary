@@ -12,12 +12,12 @@ depends "app_data_handler", ">= 0.1.3"
 attribute 'rlcatalyst/nexusUrl',
 	display_name: 'Artifact URL',
 	description: 'Provide url for war file to download',
-	default: nil
+	default: "https://s3-ap-southeast-2.amazonaws.com/petclinictest/petclinic_mysql.war"
 
 attribute 'rlcatalyst/version',
   :display_name => "Application Version",
   :description => "Version of the App to be deployed",
-  :default => nil
+  :default => "1.0"
 
 attribute 'rlcatalyst/callbackUrl',
   :display_name => "Callback URL",
