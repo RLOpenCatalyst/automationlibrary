@@ -1,0 +1,6 @@
+
+create database IF NOT EXISTS <%= node[:multitier_db][:database_name] %> default character set utf8;
+
+grant all on <%= node[:multitier_db][:database_name] %>.* to 'root'@'%' identified by '<%= node[:mysql][:server_root_password]%>';
+
+Flush privileges;

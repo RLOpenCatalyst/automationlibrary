@@ -1,0 +1,20 @@
+
+jpa.showSql=true
+
+#-------------------------------------------------------------------------------
+# MySQL Settings
+
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://<%= node[:multitier_war][:database][:server_ip]%>:<%= node[:multitier_war][:database][:server_port]%>/<%= node[:multitier_war][:database][:db_name]%>
+jdbc.username=<%= node[:multitier_war][:database][:db_user] %>
+jdbc.password= <%= node[:multitier_war][:database][:db_password]%>
+
+jdbc.initLocation=classpath:db/mysql/initDB.sql
+jdbc.dataLocation=classpath:db/mysql/populateDB.sql
+
+# Property that determines which Hibernate dialect to use
+# (only applied with "applicationContext-hibernate.xml")
+hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# Property that determines which database to use with an AbstractJpaVendorAdapter
+jpa.database=MYSQL

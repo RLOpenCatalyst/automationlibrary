@@ -1,0 +1,51 @@
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.require_version '>= 1.5.0'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = 'mutlitier-db-berkshelf'
+#  config.vm.box = 'centos_7'
+  config.vm.box = 'opscode-ubuntu-14.04'
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1624
+    v.cpus = 2
+  end
+  config.berkshelf.enabled = true
+  #config.vm.network :forwarded_port, guest: 8081, host: 8481
+  config.vm.network :forwarded_port, guest: 3306, host: 3306
+  config.vm.network :forwarded_port, guest: 8080, host: 8180 
+
+  config.vm.provision :chef_solo do |chef|
+    # chef.chef_server_url = "https://api.chef.io/organizations/appscraft"
+    # chef.validation_key_path = "/home/sraddhananad/sradhu/hosted_chef/chef-repo/.chef/appscraft-validator.pem"
+    chef.install = true
+    chef.version = "12.8.1"
+
+    chef.json = {
+      mysql: {
+        initial_root_password: 'rootpass'
+          },
+      multitier: {
+        database_name:  "petclinic",
+        database_user:  "petuser",
+        database_password:  "userP37Pa$$"
+      },
+      rlcatalyst: {
+        nexusUrl: "https://s3-ap-southeast-2.amazonaws.com/petclinictest/petclinic_mysql.war",
+        #dbpkgurl: "https://s3-ap-southeast-2.amazonaws.com/petclinictest/initial_setup_petclinic.zip"
+        dbpkgurl: "https://s3-ap-southeast-2.amazonaws.com/petclinictest/initDB.sql"
+        #dbpkgurl: "https://s3-ap-southeast-2.amazonaws.com/petclinictest/populateDB.sql"
+      }
+    }
+
+    chef.run_list = [
+        
+      'recipe[multitier_db::db_config]',
+      'recipe[multitier_db::db_deploy]',
+      'recipe[tomcat-all-rl]',
+      'recipe[multitier_war::default]'
+    ]
+  end
+end
