@@ -14,7 +14,7 @@ db_recipe = search(:node, %Q{run_list:*multitier_war* AND run_list:*multitier_db
 if !mysql_user.empty? || !db_recipe.empty?
 
   node.default[:multitier_war][:database][:server_ip] = "localhost"
-  node.default[:multitier_war][:database][:server_port] = node[:mysql][:server_port]
+  node.default[:multitier_war][:database][:server_port] = node[:multitier_war][:database][:server_port]
   node.default[:multitier_war][:database][:db_name] = node[:multitier][:database_name]
   node.default[:multitier_war][:database][:db_user] = node[:multitier][:database_user]
   node.default[:multitier_war][:database][:db_password] = node[:multitier][:database_password]

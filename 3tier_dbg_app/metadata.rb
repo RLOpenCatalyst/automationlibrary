@@ -22,4 +22,4 @@ attribute 'rlcatalyst/version',
 attribute 'rlcatalyst/callbackUrl',
   :display_name => "Callback URL",
   :description => "Catalyst url to send node report",
-  :default => "http://d4d.rlcatalyst.com/app/deploy"
+  :default => "http://52.201.159.126/app/deploy"
