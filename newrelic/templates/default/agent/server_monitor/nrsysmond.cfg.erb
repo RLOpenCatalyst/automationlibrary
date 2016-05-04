@@ -17,8 +17,9 @@
 #          required in order for the server monitor to start.
 # Default: none
 #
-license_key=<%= @resource.license %>
-
+#license_key=<%= @resource.license %>
+#['application_monitoring']['license']
+license_key=<%= node['newrelic']['application_monitoring']['license'] %>
 #
 # Option : loglevel
 # Value  : Level of detail you want in the log file (as defined by the logfile
