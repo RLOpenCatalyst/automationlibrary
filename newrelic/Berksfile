@@ -1,6 +1,6 @@
 source "https://supermarket.chef.io"
 
 
-
+cookbook 'tomcat-all-rl', path: '../tomcat-all-rl'
 metadata
 

@@ -43,8 +43,8 @@
 <!--
 <role rolename="manager-gui"/>
 <user username="tomcat" password="s3cret" roles="manager-gui"/>
-<role rolename="<%#= node['tomcat-all-rl']['userrole'] %>"/>
-<user username="<%#= node['tomcat-all-rl']['username'] %>" password="<%#= node['tomcat-all-rl']['password'] %>" roles="<%#= node['tomcat-all-rl']['userrole'] %>"/>
+<role rolename="<%= node['tomcat-all-rl']['userrole'] %>"/>
+<user username="<%= node['tomcat-all-rl']['username'] %>" password="<%= node['tomcat-all-rl']['password'] %>" roles="<%= node['tomcat-all-rl']['userrole'] %>"/>
 -->
 
 </tomcat-users>
