@@ -2,9 +2,8 @@
 source "https://api.berkshelf.com"
 metadata
 
-cookbook 'app_data_handler', path: "/home/sraddhananad/chef_workspace/chef_cat1/app_data_handler"
-cookbook 'java8', path: "/home/sraddhananad/chef_workspace/chef_cat1/java8"
-cookbook 'unzip', path: "/home/sraddhananad/chef_workspace/chef_cat1/unzip"
+cookbook 'app_data_handler', path: "../app_data_handler"
+cookbook 'java8', path: "../java8"
+cookbook 'unzip', path: "../unzip"
 cookbook 'docker', path: "../docker"
 cookbook 'git', path: "../git"
-

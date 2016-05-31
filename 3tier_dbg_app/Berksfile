@@ -3,3 +3,4 @@ source "https://supermarket.chef.io"
 metadata
 
 cookbook 'tomcat-all-rl', path: '../tomcat-all-rl'
+cookbook 'app_data_handler', path: '../app_data_handler'
